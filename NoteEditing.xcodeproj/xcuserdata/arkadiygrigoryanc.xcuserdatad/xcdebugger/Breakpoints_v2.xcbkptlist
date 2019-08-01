@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1BD46179-345A-4E51-8513-EE14A0C75637"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51C4E28C-0231-494A-9EFF-CB1EFC372DC8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoteEditing/DescriptionTableViewCell.swift"
+            timestampString = "584045416.28101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "awakeFromNib()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "020A527F-320B-4458-8DCC-BAFCA915FFC5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoteEditing/DescriptionTableViewCell.swift"
+            timestampString = "584045416.281361"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "setSelected(_:animated:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65A428D6-393B-4B92-B118-2F86DA340213"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoteEditing/DescriptionTableViewCell.swift"
+            timestampString = "584045416.281589"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "textString"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "65A428D6-393B-4B92-B118-2F86DA340213 - 941f35ceb78d6bfe"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NoteEditing.DescriptionTableViewCell.textString.modify : Swift.String"
+                  moduleName = "NoteEditing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arkadiygrigoryanc/Library/CloudStorage/iCloud%20Drive/Desktop/Stepic/iOS%20%D0%BE%D1%82%20%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81/NoteEditing/NoteEditing/DescriptionTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "65A428D6-393B-4B92-B118-2F86DA340213 - 880a4591317861f1"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NoteEditing.DescriptionTableViewCell.textString.modify : Swift.String with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "NoteEditing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arkadiygrigoryanc/Library/CloudStorage/iCloud%20Drive/Desktop/Stepic/iOS%20%D0%BE%D1%82%20%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81/NoteEditing/NoteEditing/DescriptionTableViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE84A254-2E9C-4A13-BCF9-4C9B9E82D838"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoteEditing/DescriptionTableViewCell.swift"
+            timestampString = "584045416.281804"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "textViewDidChange(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88EAE43C-618B-4FFE-9971-7A834D87647F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoteEditing/DescriptionTableViewCell.swift"
+            timestampString = "584045416.282023"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "tableView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
