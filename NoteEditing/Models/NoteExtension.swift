@@ -1,51 +1,51 @@
 import UIKit
 
 extension Note {
-    
-    var json: [String: Any] {
-        
-        var json = [String: Any]()
-        json["uid"] = uid
-        json["title"] = title
-        json["content"] = content
-        
-        if self.color != .white {
-            json["color"] = CIColor(color: color).stringRepresentation
-        }
-        if importance != .common {
-            json["importance"] = importance.rawValue
-        }
-        json["dateOfSelfDestruction"] = dateOfSelfDestruction?.timeIntervalSince1970
-        
-        return json
-    }
-    
-    // MARK: -
-    static func parse(json: [String: Any]) -> Note? {
-        
-        let uid = json["uid"] as? String ?? ""
-        let title = json["title"] as? String ?? ""
-        let content = json["content"] as? String ?? ""
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        uid = try container.decode(String.self, forKey: .uid)
+        title = try container.decode(String.self, forKey: .title)
+        content = try container.decode(String.self, forKey: .content)
         
         // Color
-        var color = UIColor.white
-        if let stringColor = json["color"] as? String {
+        if let stringColor = try? container.decode(String.self, forKey: .color) {
             color = UIColor(ciColor: CIColor(string: stringColor))
+        } else {
+            color = UIColor.white
         }
         
-        // Importance
-        let importance = Importance(rawValue: json["importance"] as? String ?? "") ?? .common
+        // ImportanceString
+        if let importanceString = try? container.decode(String.self, forKey: .importance) {
+            importance = Importance(rawValue: importanceString) ?? .common
+        } else {
+            importance = .common
+        }
         
         // Date of self destruction
-        var dateOfSelfDestruction: Date?
-        if let timeInterval = json["dateOfSelfDestruction"] as? TimeInterval {
+        if let timeInterval = try? container.decode(TimeInterval.self, forKey: .dateOfSelfDestruction) {
             dateOfSelfDestruction = Date(timeIntervalSince1970: timeInterval)
+        } else {
+            dateOfSelfDestruction = nil
         }
-        
-        return Note(uid: uid, title: title, content: content, color: color, importance: importance, dateOfSelfDestruction: dateOfSelfDestruction)
-        
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uid, forKey: .uid)
+        try container.encode(title, forKey: .title)
+        try container.encode(content, forKey: .content)
+        
+        if self.color != .white {
+            let colorString = CIColor(color: color).stringRepresentation
+            try container.encode(colorString, forKey: .color)
+        }
+        
+        if importance != .common {
+            try container.encode(importance.rawValue, forKey: .importance)
+        }
+        
+        try container.encode(dateOfSelfDestruction?.timeIntervalSince1970, forKey: .dateOfSelfDestruction)
+    }
 }
 
 extension Note: Equatable {

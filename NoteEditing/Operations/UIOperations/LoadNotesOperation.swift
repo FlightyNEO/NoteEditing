@@ -8,47 +8,59 @@
 
 import Foundation
 
+enum LoadNoteError: Error {
+    case unreachable(message: String)
+}
+
 class LoadNotesOperation: AsyncOperation {
+    
+    typealias CompletionHandler = (Result<Void, LoadNoteError>) -> Void
+    
     private var notebook: FileNotebook?
-    private let loadFromDb: LoadNotesDBOperation
-    private var loadFromBackend: LoadNotesBackendOperation?
+    private var loadFromDb: LoadNotesDBOperation?
+    private let loadFromBackend: LoadNotesBackendOperation
+    private var completion: CompletionHandler
     
-    private(set) var result: Bool? = false
+    //private(set) var result: Bool? = false
     
-    init(notebook: FileNotebook, backendQueue: OperationQueue, dbQueue: OperationQueue) {
+    init(notebook: FileNotebook, backendQueue: OperationQueue, dbQueue: OperationQueue, completion: @escaping CompletionHandler) {
         
-        loadFromDb = LoadNotesDBOperation(notebook: notebook)
+        self.notebook = notebook
+        self.completion = completion
+        
+        self.loadFromBackend = LoadNotesBackendOperation()
         
         super.init()
         
-        let loadFromBackend = LoadNotesBackendOperation()
-        loadFromDb.completionBlock = {
-            self.loadFromBackend = loadFromBackend
-            backendQueue.addOperation(loadFromBackend)
+        let loadFromDb = LoadNotesDBOperation(notebook: notebook)
+        loadFromBackend.completionBlock = {
+            switch self.loadFromBackend.loadResult! {
+            case .success(let notes):
+                self.notebook?.add(notes)
+                //self.notebook = FileNotebook(notes: notes)
+                self.removeDependency(loadFromDb)
+            case .failure(_):
+                self.loadFromDb = loadFromDb
+                //self.addDependency(loadFromDb)
+                dbQueue.addOperation(loadFromDb)
+            }
         }
         
-        addDependency(loadFromBackend)
         addDependency(loadFromDb)
+        addDependency(loadFromBackend)
         
-        dbQueue.addOperation(loadFromDb)
+        dbQueue.addOperation(loadFromBackend)
     }
     
     override func main() {
         print("LoadNotesOperation", #function)
-        switch loadFromBackend!.result! {
-        case .success(let backendNotes):
-            
-            let dbNotes = loadFromDb.notebook.notes
-            if dbNotes != backendNotes {
-                self.notebook = FileNotebook(notes: backendNotes)
+        completionBlock = {
+            if self.notebook != nil {
+                self.completion(.success(()))
             } else {
-                self.notebook = FileNotebook(notes: dbNotes)
+                self.completion(.failure(.unreachable(message: "error")))
             }
             
-            result = true
-        case .failure(let message):
-            print(message)
-            result = false
         }
         finish()
     }

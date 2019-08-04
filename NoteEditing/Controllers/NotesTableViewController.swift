@@ -19,6 +19,7 @@ private struct Identifier {
 
 class NotesTableViewController: UITableViewController {
     
+    // MARK: Private properties
     private var notebook = FileNotebook()
     private var notes: Notes {
         get {
@@ -36,14 +37,25 @@ class NotesTableViewController: UITableViewController {
         return activityIndicator
     }()
     
-    // MARK: Private properties
     private var selectedIndexPath: IndexPath?
+    
+    private let networkManager = NetworkManager.manager
+    
+    private let backendQueue = OperationQueue()
+    private let dataBaseQueue = OperationQueue()
     
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+        loadNotes { (_) in
+            print(self.notebook.notes)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
     }
     
     // MARK: Private func
@@ -109,27 +121,43 @@ extension NotesTableViewController {
 // MARK: - Operations
 extension NotesTableViewController {
     
-    func save(_ note: Note, completion: @escaping (_ index: Int?) -> Void) {
-        let saveNoteOperation = SaveNoteOperation(note: note, notebook: notebook, backendQueue: OperationQueue(), dbQueue: OperationQueue()) { result in
+    private func save(_ note: Note, completion: @escaping (_ index: Int?) -> Void) {
+        let saveNoteOperation = SaveNoteOperation(note: note,
+                                                  notebook: notebook,
+                                                  backendQueue: backendQueue,
+                                                  dbQueue: dataBaseQueue) { result in
             
-            guard case let .success(index) = result else { return }
+            guard case .success(let index) = result else { return }
             completion(index)
             
         }
         let commonQueue = OperationQueue()
-        
         commonQueue.addOperation(saveNoteOperation)
     }
     
-    func removeNote(at uid: String, completion: @escaping (_ index: Int?) -> Void) {
-        let removeNoteOperation = RemoveNoteOperation(uid: uid, notebook: notebook, backendQueue: OperationQueue(), dbQueue: OperationQueue()) { result in
+    private func removeNote(at uid: String, completion: @escaping (_ index: Int?) -> Void) {
+        let removeNoteOperation = RemoveNoteOperation(uid: uid,
+                                                      notebook: notebook,
+                                                      backendQueue: backendQueue,
+                                                      dbQueue: dataBaseQueue) { result in
             
-            guard case let .success(index) = result else { return }
+            guard case .success(let index) = result else { return }
             completion(index)
             
         }
         let commonQueue = OperationQueue()
         commonQueue.addOperation(removeNoteOperation)
+    }
+    
+    private func loadNotes(completion: @escaping (()) -> Void) {
+        let loadNotesOperation = LoadNotesOperation(notebook: notebook,
+                                                    backendQueue: backendQueue,
+                                                    dbQueue: dataBaseQueue) { result in
+            guard case .success() = result else { return }
+            completion(())
+        }
+        let commonQueue = OperationQueue()
+        commonQueue.addOperation(loadNotesOperation)
     }
     
 }

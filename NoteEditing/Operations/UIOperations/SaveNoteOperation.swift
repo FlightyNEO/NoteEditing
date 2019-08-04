@@ -25,8 +25,9 @@ class SaveNoteOperation: AsyncOperation {
         
         super.init()
         
-        let saveToBackend = SaveNotesBackendOperation(notes: notebook.notes)
+        let saveToBackend = SaveNotesBackendOperation()
         saveToDb.completionBlock = {
+            saveToBackend.notes = notebook.notes
             self.saveToBackend = saveToBackend
 
             backendQueue.addOperation(saveToBackend)
@@ -41,16 +42,12 @@ class SaveNoteOperation: AsyncOperation {
     override func main() {
         print("SaveNoteOperation", #function)
         completionBlock = {
-            switch self.saveToBackend!.result! {
+            switch self.saveToBackend!.saveResult! {
             case .success:
                 self.completion(.success(self.saveToDb.savingIndex))
-            //result = (true, index: saveToDb.index)
             case .failure(let error):
-                self.completion(.success(self.saveToDb.savingIndex))
-                //self.completion(.failure(.unreachable(message: error.localizedDescription)))
-                //result = (false, index: saveToDb.index)
-            }
-            
+                self.completion(.failure(.unreachable(message: error.localizedDescription)))
+            }            
         }
         finish()
     }

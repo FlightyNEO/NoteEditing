@@ -63,7 +63,11 @@ class ColorsCollectionViewController: UICollectionViewController {
     }
     
     private func setupIndexColor() {
-        choosingIndexColor = colors.enumerated().first { $1 == color }?.offset ?? 3
+        let stringColor = CIColor(color: color).stringRepresentation
+        choosingIndexColor = colors.enumerated().first {
+            let color = CIColor(color: $1 ?? .white).stringRepresentation
+            return color == stringColor
+        }?.offset ?? 3
         if choosingIndexColor == 3 {
             colors[3] = color
         }

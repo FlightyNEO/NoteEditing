@@ -35,8 +35,9 @@ class RemoveNoteOperation: AsyncOperation {
         
         super.init()
         
-        let saveToBackend = SaveNotesBackendOperation(notes: self.removeFromDb.notebook.notes)
+        let saveToBackend = SaveNotesBackendOperation() // notes: self.removeFromDb.notebook.notes
         removeFromDb.completionBlock = {
+            saveToBackend.notes = notebook.notes
             self.saveToBackend = saveToBackend
             backendQueue.addOperation(saveToBackend)
         }
@@ -50,14 +51,11 @@ class RemoveNoteOperation: AsyncOperation {
     override func main() {
         print("RemoveNoteOperation", #function)
         completionBlock = {
-            switch self.saveToBackend!.result! {
+            switch self.saveToBackend!.saveResult! {
             case .success:
                 self.completion(.success(self.removeFromDb.removingIndex))
-                //result = true
             case .failure(let error):
-                self.completion(.success(self.removeFromDb.removingIndex))
-                //self.completion(.failure(.unreachable(message: error.localizedDescription)))
-                //result = false
+                self.completion(.failure(.unreachable(message: error.localizedDescription)))
             }
         }
         finish()

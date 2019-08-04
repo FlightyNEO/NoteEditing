@@ -14,17 +14,30 @@ enum LoadNotesBackendOperationResult {
 }
 
 class LoadNotesBackendOperation: BaseBackendOperation {
-    var result: LoadNotesBackendOperationResult?
+    var loadResult: LoadNotesBackendOperationResult?
+    private let networkManager = NetworkManager.manager
     
     override func main() {
-        //sleep(2) // Что-то происходит
         print("LoadNotesBackendOperation", #function)
-        // Загружаем из бэкенда
-        // if success
-        // let notes = Notes(data)
-        // result = .success(notes: notes)
-        // else if failure
-        result = .failure(.unreachable(message: "Failure mock"))
-        finish()
+        
+        networkManager.fetchGist { result in
+            
+            switch result {
+            case .success(let gist):
+                
+                do {
+                    let notes = try gist.getNotes(at: self.networkManager.fileName)
+                    self.loadResult = .success(notes: notes)
+                } catch {
+                    self.loadResult = .failure(.unreachable(message: error.localizedDescription))
+                }
+                
+            case .failure(let error):
+                self.loadResult = .failure(.unreachable(message: error.localizedDescription))
+            }
+            self.finish()
+        }
+        
     }
+    
 }

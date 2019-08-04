@@ -2,7 +2,7 @@ import UIKit
 
 typealias Notes = [Note]
 
-struct Note {
+struct Note: Codable {
     let uid: String
     var title: String
     var content: String
@@ -13,6 +13,16 @@ struct Note {
     // MARK: -
     enum Importance: String {
         case unimportant, common, important
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case uid
+        case title
+        case content
+        case color
+        case importance
+        case dateOfSelfDestruction
+
     }
     
     // MARK: - Initialization

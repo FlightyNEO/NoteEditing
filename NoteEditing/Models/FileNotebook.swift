@@ -14,7 +14,6 @@ class FileNotebook {
     }
     
     // MARK: - Initializations
-    
     convenience init(notes: Notes) {
         self.init()
         self.add(notes)
@@ -62,8 +61,7 @@ class FileNotebook {
     /// Write to file
     public func write() throws {
         do {
-            let json = notes.map { $0.json }
-            let data = try JSONSerialization.data(withJSONObject: json, options: [])
+            let data = try JSONEncoder().encode(notes)
             try data.write(to: FileNotebook.url, options: NSData.WritingOptions.noFileProtection)
         } catch let error {
             throw error
@@ -74,18 +72,8 @@ class FileNotebook {
     public class func read() throws -> FileNotebook {
         do {
             let data = try Data(contentsOf: FileNotebook.url)
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
-                throw DataManagerError.canNotFetchNote(message: "Can't fetch emojis from derictory")
-            }
-            
-            let notebook = FileNotebook()
-            json.forEach {
-                guard let note = Note.parse(json: $0) else { return }
-                _ = notebook.put(note)
-            }
-            
-            return notebook
-            
+            let notes = try JSONDecoder().decode(Notes.self, from: data)
+            return FileNotebook(notes: notes)
         } catch let error {
             throw error
         }
