@@ -48,6 +48,9 @@
 		58DD514022E807740038188F /* LoadNotesBackendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DD513522E807740038188F /* LoadNotesBackendOperation.swift */; };
 		58DD514122E807740038188F /* BaseBackendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DD513622E807740038188F /* BaseBackendOperation.swift */; };
 		58DD514222E807740038188F /* SaveNotesBackendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DD513722E807740038188F /* SaveNotesBackendOperation.swift */; };
+		58E8D35822F6B77400563588 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58E8D35722F6B77400563588 /* Login.storyboard */; };
+		58E8D35A22F6B82C00563588 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8D35922F6B82C00563588 /* LoginViewController.swift */; };
+		58E8D35C22F6C55900563588 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8D35B22F6C55900563588 /* Token.swift */; };
 		58F7060E22F47A94003AC030 /* GistFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F7060C22F47A94003AC030 /* GistFile.swift */; };
 		58F7060F22F47A94003AC030 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F7060D22F47A94003AC030 /* Gist.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +99,9 @@
 		58DD513522E807740038188F /* LoadNotesBackendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadNotesBackendOperation.swift; sourceTree = "<group>"; };
 		58DD513622E807740038188F /* BaseBackendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBackendOperation.swift; sourceTree = "<group>"; };
 		58DD513722E807740038188F /* SaveNotesBackendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveNotesBackendOperation.swift; sourceTree = "<group>"; };
+		58E8D35722F6B77400563588 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		58E8D35922F6B82C00563588 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		58E8D35B22F6C55900563588 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		58F7060C22F47A94003AC030 /* GistFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GistFile.swift; path = NoteEditing/Models/GistFile.swift; sourceTree = SOURCE_ROOT; };
 		58F7060D22F47A94003AC030 /* Gist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gist.swift; path = NoteEditing/Models/Gist.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -178,6 +184,7 @@
 				5877E6F422D1DA9A00932E4C /* Views */,
 				58B3B71B22D3F27D0059DA1C /* Helpers */,
 				5882D97E22CFBEDA00CE6814 /* LaunchScreen.storyboard */,
+				58E8D35722F6B77400563588 /* Login.storyboard */,
 				589E6BEE22E37EB600E181ED /* Main.storyboard */,
 				589E6BF122E37EBE00E181ED /* ColorPickerViewControllerStoryboard.storyboard */,
 				5882D97922CFBED600CE6814 /* EditNote.storyboard */,
@@ -203,6 +210,7 @@
 		58B3B71C22D3F2A20059DA1C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58E8D35922F6B82C00563588 /* LoginViewController.swift */,
 				589E6BF422E37F4B00E181ED /* NotesTableViewController.swift */,
 				5882D97722CFBED600CE6814 /* NoteEditingViewController.swift */,
 				58D0699722D0C5A800EA7CFE /* ColorsCollectionViewController.swift */,
@@ -261,6 +269,7 @@
 				58F7060D22F47A94003AC030 /* Gist.swift */,
 				58F7060C22F47A94003AC030 /* GistFile.swift */,
 				582DC88722F47CE9007FD611 /* GistPatch.swift */,
+				58E8D35B22F6C55900563588 /* Token.swift */,
 			);
 			path = Gist;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 			files = (
 				5882D98022CFBEDA00CE6814 /* LaunchScreen.storyboard in Resources */,
 				589E6BF322E37EBE00E181ED /* ColorPickerViewControllerStoryboard.storyboard in Resources */,
+				58E8D35822F6B77400563588 /* Login.storyboard in Resources */,
 				5882D97D22CFBEDA00CE6814 /* Assets.xcassets in Resources */,
 				5882D97B22CFBED600CE6814 /* EditNote.storyboard in Resources */,
 				589E6BF022E37EB600E181ED /* Main.storyboard in Resources */,
@@ -372,12 +382,14 @@
 				582DC88422F47CCB007FD611 /* FileNotebook.swift in Sources */,
 				58D0699C22D0F4EF00EA7CFE /* GradientCell.swift in Sources */,
 				582DC88822F47CEA007FD611 /* GistPatch.swift in Sources */,
+				58E8D35A22F6B82C00563588 /* LoginViewController.swift in Sources */,
 				58DD513D22E807740038188F /* LoadNotesOperation.swift in Sources */,
 				582DC88522F47CCB007FD611 /* Note.swift in Sources */,
 				589E6BF922E37F6D00E181ED /* NoteCell.swift in Sources */,
 				58B3B71A22D3B5AA0059DA1C /* String+Extension.swift in Sources */,
 				58DD513E22E807740038188F /* RemoveNoteOperation.swift in Sources */,
 				582B39C322D167D400BE416E /* CheckView.swift in Sources */,
+				58E8D35C22F6C55900563588 /* Token.swift in Sources */,
 				5877E6F322D1D94000932E4C /* Utils.swift in Sources */,
 				5882D97822CFBED600CE6814 /* NoteEditingViewController.swift in Sources */,
 				58DD513822E807740038188F /* SaveNoteDBOperation.swift in Sources */,

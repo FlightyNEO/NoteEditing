@@ -47,8 +47,7 @@ class NotesTableViewController: UITableViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
-        
+        navigationItem.leftBarButtonItem = editButtonItem
         loadNotes { (_) in
             print(self.notebook.notes)
             DispatchQueue.main.async {
