@@ -10,10 +10,6 @@ import Foundation
 
 class LoadNotesDBOperation: BaseDBOperation {
     
-//    override init(notebook: FileNotebook) {
-//        super.init(notebook: notebook)
-//    }
-    
     override func main() {
         print("LoadNotesDBOperation", #function)
         guard let newNotebook = try? FileNotebook.read() else { return }

@@ -235,9 +235,9 @@
 		58DD512A22E807740038188F /* DBOperations */ = {
 			isa = PBXGroup;
 			children = (
+				58DD512D22E807740038188F /* BaseDBOperation.swift */,
 				58DD512B22E807740038188F /* SaveNoteDBOperation.swift */,
 				58DD512C22E807740038188F /* LoadNotesDBOperation.swift */,
-				58DD512D22E807740038188F /* BaseDBOperation.swift */,
 				58DD512E22E807740038188F /* RemoveNoteDBOperation.swift */,
 			);
 			path = DBOperations;

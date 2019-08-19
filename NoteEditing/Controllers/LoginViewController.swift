@@ -15,10 +15,6 @@ class LoginViewController: UIViewController {
     // MARK: Private properties
     private let networkManager = NetworkManager.manager
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-    
     // MARK: Private methods
     private func showWebView() {
         let viewController = UIViewController()
@@ -32,13 +28,13 @@ class LoginViewController: UIViewController {
     private func authorization(with url: URL) {
         networkManager.authorization(url: url) { result in
             DispatchQueue.main.async { [weak self] in
-                self?.dismiss(animated: true) {
-                    switch result {
-                    case .success(_):
-                        self?.performSegue(withIdentifier: "ShowNotebook", sender: nil)
-                    case .failure(let error):
-                        print(error)
+                switch result {
+                case .success(_):
+                    self?.dismiss(animated: true) {
+                        self?.performSegue(withIdentifier: showNotebookIdetifier, sender: nil)
                     }
+                case .failure(let error):
+                    print(error)
                 }
             }
         }

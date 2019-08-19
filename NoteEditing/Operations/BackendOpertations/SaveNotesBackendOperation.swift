@@ -4,6 +4,7 @@ enum SaveNotesBackendResult {
 }
 
 class SaveNotesBackendOperation: BaseBackendOperation {
+    
     var saveResult: SaveNotesBackendResult?
     var notes: Notes = []
     private let networkManager = NetworkManager.manager

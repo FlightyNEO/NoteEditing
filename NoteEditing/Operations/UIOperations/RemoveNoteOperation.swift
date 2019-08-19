@@ -20,13 +20,9 @@ class RemoveNoteOperation: AsyncOperation {
     private let notebook: FileNotebook
     private let removeFromDb: RemoveNoteDBOperation
     private var saveToBackend: SaveNotesBackendOperation?
-    
     private var completion: CompletionHandler
     
-    //private(set) var result: Bool? = false
-    
     init(uid: String, notebook: FileNotebook, backendQueue: OperationQueue, dbQueue: OperationQueue, completion: @escaping CompletionHandler) {
-        
         self.uid = uid
         self.notebook = notebook
         self.completion = completion
@@ -51,12 +47,7 @@ class RemoveNoteOperation: AsyncOperation {
     override func main() {
         print("RemoveNoteOperation", #function)
         completionBlock = {
-            switch self.saveToBackend!.saveResult! {
-            case .success:
-                self.completion(.success(self.removeFromDb.removingIndex))
-            case .failure(let error):
-                self.completion(.failure(.unreachable(message: error.localizedDescription)))
-            }
+            self.completion(.success(self.removeFromDb.removingIndex))
         }
         finish()
     }

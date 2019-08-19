@@ -48,6 +48,12 @@ extension Note {
     }
 }
 
+extension Note: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid)
+    }
+}
+
 extension Note: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.uid == rhs.uid

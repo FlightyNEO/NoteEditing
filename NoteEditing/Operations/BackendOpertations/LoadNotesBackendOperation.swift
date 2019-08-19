@@ -14,6 +14,7 @@ enum LoadNotesBackendOperationResult {
 }
 
 class LoadNotesBackendOperation: BaseBackendOperation {
+    
     var loadResult: LoadNotesBackendOperationResult?
     private let networkManager = NetworkManager.manager
     
@@ -25,13 +26,6 @@ class LoadNotesBackendOperation: BaseBackendOperation {
             switch result {
             case .success(let notes):
                 self.loadResult = .success(notes: notes)
-//                do {
-//                    let notes = try gist.getNotes(at: self.networkManager.fileName)
-//                    self.loadResult = .success(notes: notes)
-//                } catch {
-//                    self.loadResult = .failure(.unreachable(message: error.localizedDescription))
-//                }
-                
             case .failure(let error):
                 self.loadResult = .failure(.unreachable(message: error.localizedDescription))
             }
